@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: grey;
+}
+
+.title {
+    text-align: center;
+}
+
+.taskList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.taskItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem;
+}
