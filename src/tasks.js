@@ -44,7 +44,7 @@ const tasks = [
     {
         id: 8,
         name: '1 Mile Run',
-        info: 'Go on a 1 mile run for cardioa.',
+        info: 'Go on a 1 mile run for cardio.',
         type: 'fitness',
     },
     {

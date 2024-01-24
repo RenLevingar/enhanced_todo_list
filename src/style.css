@@ -57,3 +57,32 @@ body {
 .taskType{
     margin-top: 1rem;
 }
+
+/* adds new tasks */
+.taskAdder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+/* task inputs */
+.taskInput{
+    margin: 0.6rem;
+    padding: 0.25rem;
+    width: 30vw;
+}
+
+/* adds new categories */
+.categoryAdder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+/* titles for categories */
+.taskCategory{
+    font-size: 2rem;
+    margin-top: 1rem;
+}
