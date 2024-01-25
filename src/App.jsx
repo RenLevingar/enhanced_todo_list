@@ -24,20 +24,10 @@ function reducer(state, action) {
       });
       return updatedTasks;
     }
-    case 'editTask': {
-      const updatedTasks = state.map(task => {
-        if (task.id === id) {
-          return { ...task, ...taskData };
-        }
-        return task;
-      });
-      return updatedTasks;
-    }
     default:
       return state;
   }
 }
-
 
 function categoryReducer(state, action) {
   const { type, newCategory, removeCategory } = action;
@@ -107,18 +97,6 @@ const App = () => {
     try {
       dispatch({ type: 'editCategory', editedCategory: taskCategory, taskData: { type: newCategory } });
       setAllTaskCategories(allTaskCategories.map(category => (category === taskCategory ? newCategory : category)));
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  function editTask(id, editedName, editedInfo, editedCategory) {
-    try {
-      dispatch({
-        type: 'editTask',
-        id: id,
-        taskData: { name: editedName, info: editedInfo, type: editedCategory },
-      });
     } catch (error) {
       console.log(error);
     }
