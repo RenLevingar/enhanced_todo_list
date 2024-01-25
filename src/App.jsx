@@ -6,7 +6,7 @@ import './style.css';
 const dataLength = data.length;
 
 function reducer(state, action) {
-  const { type, id, taskData } = action;
+  const { type, id, taskData, editedCategory } = action;
   switch (type) {
     case 'remove': {
       const updatedTasks = state.filter(task => task.id !== id);
@@ -15,10 +15,29 @@ function reducer(state, action) {
     case 'add': {
       return [...state, taskData];
     }
+    case 'editCategory': {
+      const updatedTasks = state.map(task => {
+        if (task.type === editedCategory) {
+          return { ...task, type: taskData.type };
+        }
+        return task;
+      });
+      return updatedTasks;
+    }
+    case 'editTask': {
+      const updatedTasks = state.map(task => {
+        if (task.id === id) {
+          return { ...task, ...taskData };
+        }
+        return task;
+      });
+      return updatedTasks;
+    }
     default:
       return state;
   }
 }
+
 
 function categoryReducer(state, action) {
   const { type, newCategory, removeCategory } = action;
@@ -80,10 +99,29 @@ const App = () => {
   function removeCategory() {
     dispatch2({ type: 'removeCategory', removeCategory: taskCategory });
     setAllTaskCategories(allTaskCategories.filter(category => category !== taskCategory));
-
-    // Remove tasks with the selected category
     const updatedTasks = tasks.filter(task => task.type !== taskCategory);
     dispatch({ type: 'removeTasksByCategory', updatedTasks });
+  }
+
+  function editCategory() {
+    try {
+      dispatch({ type: 'editCategory', editedCategory: taskCategory, taskData: { type: newCategory } });
+      setAllTaskCategories(allTaskCategories.map(category => (category === taskCategory ? newCategory : category)));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function editTask(id, editedName, editedInfo, editedCategory) {
+    try {
+      dispatch({
+        type: 'editTask',
+        id: id,
+        taskData: { name: editedName, info: editedInfo, type: editedCategory },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -169,6 +207,34 @@ const App = () => {
             ))}
           </select>
           <button type='button' onClick={removeCategory}>Remove Category</button>
+        </section>
+      </form>
+
+      <form className='container'>
+        <h1 className='title'>Edit Category</h1>
+        <section className='taskAdder'>
+          <select
+            className="taskInput"
+            value={taskCategory}
+            onChange={(e) => setTaskCategory(e.target.value)}
+          >
+            <option value="" disabled hidden>
+              Select Category
+            </option>
+            {allTaskCategories.map(category => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+          <input
+            type='text'
+            className="taskInput"
+            placeholder='New Category Name'
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
+          />
+          <button type='button' onClick={editCategory}>Edit Category</button>
         </section>
       </form>
 

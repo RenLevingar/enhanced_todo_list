@@ -1,13 +1,14 @@
-import SingleTask from "./SingleTask";
+import SingleTask from './SingleTask'
 
 const Task = ({ taskName, removeTask, tasks }) => {
-  const currentTasks = tasks.filter((x) => x.type === taskName);
+  const currentTasks = tasks.filter((task) => task.type === taskName);
+
   return (
     <article>
       <h1 className="taskCategory">{taskName}</h1>
-      {/* Render SingleTask components for each task in taskItems */}
+      {/* Render SingleTask components for each task in currentTasks */}
       {currentTasks.map((item) => (
-        <SingleTask key={item.type} {...item} removeTask={removeTask}/>
+        <SingleTask key={item.id} removeTask={removeTask} item={item} />
       ))}
     </article>
   );
