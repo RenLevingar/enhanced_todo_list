@@ -2,12 +2,13 @@ import { useReducer, useState, useEffect } from 'react';
 import SingleCategory from './Components/Category'
 import './style.css';
 
-// Function to retrieve data from local storage
+// function to retrieve data from local storage
 const getDataFromLocalStorage = (key) => {
   const storedData = localStorage.getItem(key);
   return storedData ? JSON.parse(storedData) : [];
 };
 
+// primary reducer functions
 function reducer(state, action) {
   const { type, id, taskData, editedCategory } = action;
   switch (type) {
@@ -38,6 +39,7 @@ function reducer(state, action) {
   }
 }
 
+// category reducer functions
 function categoryReducer(state, action) {
   const { type, newCategory, removeCategory } = action;
   switch (type) {
@@ -57,6 +59,7 @@ function categoryReducer(state, action) {
 }
 
 const App = () => {
+  // useStates and useReducers
   const [taskName, setTaskName] = useState('');
   const [taskInfo, setTaskInfo] = useState('');
   const [taskCategory, setTaskCategory] = useState('');
@@ -65,6 +68,7 @@ const App = () => {
   const [tasks, dispatch] = useReducer(reducer, getDataFromLocalStorage('tasks'));
   const [categories, dispatch2] = useReducer(categoryReducer, []);
 
+  // useEffect to retirve from local storage
   useEffect(() => {
     let baseList = [];
     for (let item of getDataFromLocalStorage('tasks')) {
@@ -74,10 +78,12 @@ const App = () => {
     setAllTaskCategories(taskTypeList);
   }, []);
 
+  // remove task
   function removeTask(id) {
     dispatch({ type: 'remove', id: id });
   }
 
+  // add task
   function addTask() {
     const newTask = {
       id: tasks.length + 1,
@@ -89,6 +95,7 @@ const App = () => {
     dispatch({ type: 'add', taskData: newTask });
   }
 
+  // add category
   function addCategory() {
     try {
       dispatch2({ type: 'addNewCategory', newCategory: newCategory });
@@ -99,6 +106,7 @@ const App = () => {
     }
   }
 
+  // remove category
   function removeCategory() {
     dispatch2({ type: 'removeCategory', removeCategory: taskCategory });
     setAllTaskCategories(allTaskCategories.filter(category => category !== taskCategory));
@@ -106,6 +114,7 @@ const App = () => {
     dispatch({ type: 'removeTasksByCategory', updatedTasks });
   }
 
+  // edit category
   function editCategory() {
     try {
       dispatch({ type: 'editCategory', editedCategory: taskCategory, taskData: { type: newCategory } });

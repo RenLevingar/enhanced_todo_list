@@ -1,3 +1,22 @@
+# Ren Levingar
+
+### Description 
+This is a task manager from adding and removing both tasks and categories.
+
+### Setup
+Make sure evrything is downloaded and then run the code. 
+
+### Initialize
+Use the terminal command "npm start" or "npm run start" to begin the program. Note: make sure you are in the right directory.
+
+### style.css
+There is basic styling for all parts of the website along with a responsive design.
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
