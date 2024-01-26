@@ -86,3 +86,24 @@ body {
     font-size: 2rem;
     margin-top: 1rem;
 }
+
+/* button */
+button {
+    background-color: lightblue;
+    height: 45px;
+    border-radius: 15px;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: 600;
+}
+button:hover{
+    background-color: rgb(191, 237, 252);
+}
+
+/* input */
+input{
+    border-radius: 15px;
+}
+select{
+    border-radius: 15px;
+}
